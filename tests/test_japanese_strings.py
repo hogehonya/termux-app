@@ -30,6 +30,13 @@ MODULES = {
         "sha256": "281f6ee45d10fa40fecdb9d548236f9863acad825a05e03051b90d1460ccb2a1",
         "identical_allowed": set(),
     },
+    "terminal-view": {
+        "default": REPO_ROOT / "terminal-view/src/main/res/values/strings.xml",
+        "japanese": REPO_ROOT / "terminal-view/src/main/res/values-ja/strings.xml",
+        "count": 3,
+        "sha256": "c2880e9b490ea42e0816dc2ad1b9bd6b1e75098508afd3681433ba07b14a1bfb",
+        "identical_allowed": set(),
+    },
 }
 
 FORMAT_ARGUMENT_RE = re.compile(r"%(?:\d+\$)?[-#+ 0,(]*\d*(?:\.\d+)?[A-Za-z%]")

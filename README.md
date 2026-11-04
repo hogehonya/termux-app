@@ -237,7 +237,7 @@ The `versionName` in `build.gradle` files of Termux and its plugin apps must fol
 
 ### Japanese Localization
 
-The Japanese UI translations cover all strings in [`app/src/main/res/values/strings.xml`](app/src/main/res/values/strings.xml) and [`termux-shared/src/main/res/values/strings.xml`](termux-shared/src/main/res/values/strings.xml), including strings referenced by preference XML. They are provided in the matching `values-ja/strings.xml` files, and Android selects them automatically when the device locale is Japanese.
+The Japanese UI translations cover all strings in [`app/src/main/res/values/strings.xml`](app/src/main/res/values/strings.xml), [`termux-shared/src/main/res/values/strings.xml`](termux-shared/src/main/res/values/strings.xml) and [`terminal-view/src/main/res/values/strings.xml`](terminal-view/src/main/res/values/strings.xml), including strings referenced by preference XML. They are provided in the matching `values-ja/strings.xml` files, and Android selects them automatically when the device locale is Japanese.
 
 Keep string names, format arguments, entity references and `\n` escapes identical to the default resources. Verify the translations with:
 

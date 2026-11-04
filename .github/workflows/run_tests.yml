@@ -21,6 +21,9 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
+    - name: Validate Japanese string resources
+      run: |
+        PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
     - name: Execute tests
       run: |
         ./gradlew test
