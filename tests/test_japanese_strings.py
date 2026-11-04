@@ -48,6 +48,12 @@ TECHNICAL_TOKEN_RE = re.compile(
     r"[A-Z][A-Z0-9_]{2,}|(?<!\\)[a-z][a-z0-9]*(?:[A-Z][a-z0-9]+)+"
 )
 
+# Human-facing menu labels quoted in a translated message must reference the
+# actual Japanese string resource used by the menu, not the English default.
+MENU_LABEL_REFERENCES = {
+    ("termux-shared", "msg_report_truncated", "Save To File"): "action_save_to_file",
+}
+
 
 def parse_strings(path):
     root = ET.parse(path).getroot()
@@ -171,12 +177,37 @@ class JapaneseStringsTest(unittest.TestCase):
                         continue
 
                     japanese_value = japanese[name]
+                    menu_label_references = {
+                        f"`{default_label}`": (default_label, resource_name)
+                        for (ref_module, ref_name, default_label), resource_name
+                        in MENU_LABEL_REFERENCES.items()
+                        if ref_module == module and ref_name == name
+                    }
+
                     for token in sorted(set(TECHNICAL_TOKEN_RE.findall(default_value))):
+                        if token in menu_label_references:
+                            _, resource_name = menu_label_references[token]
+                            expected_label = japanese.get(resource_name)
+                            expected_token = f"`{expected_label}`"
+                            if not expected_label or expected_token not in japanese_value:
+                                problems.append(
+                                    f"{name}: missing Japanese menu label {expected_token!r} "
+                                    f"for {token!r}"
+                                )
+                            continue
                         if token not in japanese_value:
                             problems.append(f"{name}: missing technical token {token!r}")
 
+                    comparable_japanese_value = japanese_value
+                    for default_label, resource_name in menu_label_references.values():
+                        expected_label = japanese.get(resource_name)
+                        if expected_label:
+                            comparable_japanese_value = comparable_japanese_value.replace(
+                                f"`{expected_label}`", f"`{default_label}`"
+                            )
+
                     if Counter(BACKTICK_TOKEN_RE.findall(default_value)) != Counter(
-                        BACKTICK_TOKEN_RE.findall(japanese_value)
+                        BACKTICK_TOKEN_RE.findall(comparable_japanese_value)
                     ):
                         problems.append(f"{name}: backtick markup differs")
 
@@ -184,6 +215,34 @@ class JapaneseStringsTest(unittest.TestCase):
                         problems.append(f"{name}: bold markup differs")
 
                 self.assertEqual([], problems, "\n".join(problems))
+
+    def test_report_truncated_references_japanese_save_menu_label(self):
+        spec = MODULES["termux-shared"]
+        defaults = parse_strings(spec["default"])
+        japanese = parse_strings(spec["japanese"])
+
+        self.assertEqual("Save To File", defaults["action_save_to_file"])
+        default_message = defaults["msg_report_truncated"]
+        japanese_message = japanese["msg_report_truncated"]
+
+        self.assertIn("`Save To File`", default_message)
+        self.assertIn(
+            f"`{japanese['action_save_to_file']}`",
+            japanese_message,
+            "msg_report_truncated must reference the Japanese action_save_to_file menu label",
+        )
+
+    def test_menu_label_references_resolve_to_translated_resources(self):
+        for (module, name, default_label), resource_name in MENU_LABEL_REFERENCES.items():
+            with self.subTest(module=module, string=name, label=default_label):
+                spec = MODULES[module]
+                defaults = parse_strings(spec["default"])
+                japanese = parse_strings(spec["japanese"])
+
+                self.assertIn(f"`{default_label}`", defaults[name])
+                self.assertIn(resource_name, defaults)
+                self.assertIn(resource_name, japanese)
+                self.assertTrue(japanese[resource_name].strip())
 
     def test_validator_rejects_missing_translation(self):
         problems = validate_pair("sample", "Default", "", "Default", "", set())

@@ -56,7 +56,7 @@
     <!-- ReportActivity -->
     <string name="title_report_text">レポートテキスト</string>
     <string name="msg_report_truncated">**レポートは切り詰められました**\n\nレポートが大きすぎるため、ここでは表示できません。
-        オプションメニュー (右上の 3 点) の `Save To File` オプションを使用してファイルに保存し、外部のテキストエディタアプリで表示してください。\n\n##\n\n</string>
+        オプションメニュー (右上の 3 点) の `ファイルに保存` オプションを使用してファイルに保存し、外部のテキストエディタアプリで表示してください。\n\n##\n\n</string>
 
 
 
