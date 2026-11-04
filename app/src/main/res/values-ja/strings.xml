@@ -48,6 +48,8 @@
     <string name="msg_max_terminals_reached">新しく作成する前に既存のものを閉じてください。</string>
 
     <string name="title_rename_session">セッション名を設定</string>
+    <string name="title_switch_session">セッションを切り替え</string>
+    <string name="session_default_name">セッション %1$d</string>
     <string name="action_rename_session_confirm">設定</string>
     <string name="title_create_named_session">名前付きセッションを作成</string>
     <string name="action_create_named_session_confirm">作成</string>
