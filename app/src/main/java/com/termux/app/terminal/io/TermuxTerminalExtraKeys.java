@@ -1,13 +1,17 @@
 package com.termux.app.terminal.io;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.termux.R;
 import com.termux.app.TermuxActivity;
+import com.termux.app.TermuxService;
 import com.termux.app.terminal.TermuxTerminalSessionActivityClient;
 import com.termux.app.terminal.TermuxTerminalViewClient;
 import com.termux.shared.logger.Logger;
@@ -15,10 +19,15 @@ import com.termux.shared.termux.extrakeys.ExtraKeysConstants;
 import com.termux.shared.termux.extrakeys.ExtraKeysInfo;
 import com.termux.shared.termux.settings.properties.TermuxPropertyConstants;
 import com.termux.shared.termux.settings.properties.TermuxSharedProperties;
+import com.termux.shared.termux.shell.command.runner.terminal.TermuxSession;
 import com.termux.shared.termux.terminal.io.TerminalExtraKeys;
+import com.termux.terminal.TerminalSession;
 import com.termux.view.TerminalView;
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TermuxTerminalExtraKeys extends TerminalExtraKeys {
 
@@ -100,9 +109,49 @@ public class TermuxTerminalExtraKeys extends TerminalExtraKeys {
             TerminalView terminalView = mTermuxTerminalViewClient.getActivity().getTerminalView();
             if (terminalView != null && terminalView.mEmulator != null)
                 terminalView.mEmulator.toggleAutoScrollDisabled();
+        } else if ("SESSIONS".equals(key)) {
+            showSessionsDialog();
+        } else if ("NEWSESSION".equals(key)) {
+            if (mTermuxTerminalSessionActivityClient != null)
+                mTermuxTerminalSessionActivityClient.addNewSession(false, null);
         } else {
             super.onTerminalExtraKeyButtonClick(view, key, ctrlDown, altDown, shiftDown, fnDown);
         }
+    }
+
+    /** Show a dialog that lists the running sessions so that the user can switch to one of them. */
+    public void showSessionsDialog() {
+        TermuxService service = mActivity.getTermuxService();
+        if (service == null || mTermuxTerminalSessionActivityClient == null) return;
+
+        final List<TermuxSession> sessions = new ArrayList<>(service.getTermuxSessions());
+        if (sessions.isEmpty()) return;
+
+        TerminalSession currentSession = mActivity.getCurrentSession();
+
+        CharSequence[] items = new CharSequence[sessions.size()];
+        for (int i = 0; i < sessions.size(); i++) {
+            TerminalSession session = sessions.get(i).getTerminalSession();
+            if (session == null) {
+                items[i] = "[" + (i + 1) + "]";
+                continue;
+            }
+            String name = TextUtils.isEmpty(session.mSessionName) ? session.getTitle() : session.mSessionName;
+            if (TextUtils.isEmpty(name) || "null".equals(name))
+                name = mActivity.getString(R.string.session_default_name, i + 1);
+            items[i] = "[" + (i + 1) + "] " + name + (session == currentSession ? " ●" : "");
+        }
+
+        new AlertDialog.Builder(mActivity)
+            .setTitle(R.string.title_switch_session)
+            .setItems(items, (dialog, which) -> {
+                if (which >= 0 && which < sessions.size())
+                    mTermuxTerminalSessionActivityClient.setCurrentSession(sessions.get(which).getTerminalSession());
+            })
+            .setPositiveButton(R.string.action_new_session, (dialog, which) ->
+                mTermuxTerminalSessionActivityClient.addNewSession(false, null))
+            .setNegativeButton(android.R.string.cancel, null)
+            .show();
     }
 
 }

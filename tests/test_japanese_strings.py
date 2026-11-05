@@ -12,8 +12,8 @@ MODULES = {
     "app": {
         "default": REPO_ROOT / "app/src/main/res/values/strings.xml",
         "japanese": REPO_ROOT / "app/src/main/res/values-ja/strings.xml",
-        "count": 105,
-        "sha256": "7972df37deeefe747339e4a464c1bbde708575abc95f5234bb365aba2505d2f9",
+        "count": 107,
+        "sha256": "0a64e22fb0dce29c2c5f556ed074be0f327e44149553dc174c23c47d8725c218",
         "identical_allowed": {
             "application_name",
             "termux_preferences_title",
