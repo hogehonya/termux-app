@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE resources [
+    <!ENTITY TERMUX_PACKAGE_NAME "com.termux">
+    <!ENTITY TERMUX_APP_NAME "Termux">
+    <!ENTITY TERMUX_API_APP_NAME "Termux:API">
+    <!ENTITY TERMUX_BOOT_APP_NAME "Termux:Boot">
+    <!ENTITY TERMUX_FLOAT_APP_NAME "Termux:Float">
+    <!ENTITY TERMUX_STYLING_APP_NAME "Termux:Styling">
+    <!ENTITY TERMUX_TASKER_APP_NAME "Termux:Tasker">
+    <!ENTITY TERMUX_WIDGET_APP_NAME "Termux:Widget">
+    ]>
+
+<resources>
+
+    <string name="application_name">&TERMUX_APP_NAME;</string>
+    <string name="shared_user_label">&TERMUX_APP_NAME; ユーザー</string>
+
+
+
+    <!-- Termux RUN_COMMAND permission -->
+    <string name="permission_run_command_label">&TERMUX_APP_NAME; 環境でコマンドを実行</string>
+    <string name="permission_run_command_description">&TERMUX_APP_NAME; 環境内で任意のコマンドを実行し、
+        ファイルにアクセスします</string>
+
+
+
+    <!-- Termux Bootstrap Packages Installation -->
+    <string name="bootstrap_installer_body">bootstrap パッケージをインストールしています…</string>
+    <string name="bootstrap_error_title">bootstrap をインストールできません</string>
+    <string name="bootstrap_error_body">&TERMUX_APP_NAME; は bootstrap パッケージをインストールできませんでした。</string>
+    <string name="bootstrap_error_abort">中止</string>
+    <string name="bootstrap_error_try_again">再試行</string>
+    <string name="bootstrap_error_not_primary_user_message">&TERMUX_APP_NAME; はプライマリユーザーでのみ実行できます。
+        \nbootstrap バイナリは &TERMUX_APP_NAME; 用にコンパイルされており、$PREFIX パスがハードコードされているため、
+        次のパス以外にはインストールできません:\n%1$s。</string>
+    <string name="bootstrap_error_installed_on_portable_sd">&TERMUX_APP_NAME; はデバイスのポータブル/外部/リムーバブル SD カードには
+        インストールできません。
+        \nbootstrap バイナリは &TERMUX_APP_NAME; 用にコンパイルされており、$PREFIX パスがハードコードされているため、
+        次のパス以外にはインストールできません:\n%1$s。</string>
+
+
+
+    <!-- Terminal Sidebar and Shortcuts -->
+    <string name="action_new_session">新しいセッション</string>
+    <string name="action_new_session_failsafe">フェイルセーフ</string>
+    <string name="title_max_terminals_reached">ターミナルの上限に達しました</string>
+    <string name="msg_max_terminals_reached">新しく作成する前に既存のものを閉じてください。</string>
+
+    <string name="title_rename_session">セッション名を設定</string>
+    <string name="action_rename_session_confirm">設定</string>
+    <string name="title_create_named_session">名前付きセッションを作成</string>
+    <string name="action_create_named_session_confirm">作成</string>
+
+    <string name="action_toggle_soft_keyboard">キーボード</string>
+
+    <string name="msg_enabling_terminal_toolbar">ターミナルツールバーを有効化しています</string>
+    <string name="msg_disabling_terminal_toolbar">ターミナルツールバーを無効化しています</string>
+
+
+
+    <!-- Terminal Popup -->
+    <string name="action_select_url">URL を選択</string>
+    <string name="title_select_url_dialog">URL をタップしてコピー、長押しして開く</string>
+    <string name="title_select_url_none_found">ターミナルに URL が見つかりません。</string>
+    <string name="msg_select_url_copied_to_clipboard">URL をクリップボードにコピーしました</string>
+
+    <string name="action_share_transcript">トランスクリプトを共有</string>
+    <string name="title_share_transcript">ターミナルのトランスクリプト</string>
+    <string name="title_share_transcript_with">トランスクリプトの送信先:</string>
+
+    <string name="action_share_selected_text">選択したテキストを共有</string>
+    <string name="title_share_selected_text">ターミナルのテキスト</string>
+    <string name="title_share_selected_text_with">選択したテキストの送信先:</string>
+
+    <string name="action_autofill_username">ユーザー名を自動入力</string>
+    <string name="action_autofill_password">パスワードを自動入力</string>
+
+    <string name="action_reset_terminal">リセット</string>
+    <string name="msg_terminal_reset">ターミナルをリセットしました</string>
+
+    <string name="action_kill_process">プロセスを終了 (%d)</string>
+    <string name="title_confirm_kill_process">このセッションを本当に終了しますか？</string>
+
+    <string name="action_style_terminal">スタイル</string>
+    <string name="action_toggle_keep_screen_on">画面をオンのままにする</string>
+    <string name="action_open_help">ヘルプ</string>
+    <string name="action_open_settings">設定</string>
+
+    <string name="action_report_issue">問題を報告</string>
+    <string name="msg_generating_report">レポートを生成しています</string>
+    <string name="msg_add_termux_debug_info">レポートに Termux のデバッグ情報を追加しますか？</string>
+
+    <string name="error_styling_not_installed">&TERMUX_STYLING_APP_NAME; プラグインアプリがインストールされていません。</string>
+    <string name="action_styling_install">インストール</string>
+
+
+
+    <!-- Termux Notifications -->
+    <string name="notification_action_exit">終了</string>
+    <string name="notification_action_wake_lock">ウェイクロックを取得</string>
+    <string name="notification_action_wake_unlock">ウェイクロックを解放</string>
+
+
+
+    <!-- TermuxService -->
+    <string name="error_display_over_other_apps_permission_not_granted_to_start_terminal">&TERMUX_APP_NAME; が
+        Android 10 以降でバックグラウンドからターミナルセッションを開始するには、
+        \"他のアプリの上に重ねて表示\" 権限が必要です。
+        設定 -> アプリ -> &TERMUX_APP_NAME; -> 詳細設定 から許可してください</string>
+    <string name="error_termux_service_invalid_execution_command_runner">TermuxService への実行コマンドランナーが無効です: `%1$s`</string>
+    <string name="error_termux_service_unsupported_execution_command_runner">TermuxService への実行コマンドランナーはサポートされていません: `%1$s`</string>
+    <string name="error_termux_service_unsupported_execution_command_shell_create_mode">TermuxService への実行コマンドシェル作成モードはサポートされていません: `%1$s`</string>
+    <string name="error_termux_service_execution_command_shell_name_unset">シェル名が設定されていませんが、`%1$s` シェル作成モードが指定されました</string>
+
+
+
+    <!-- Termux RunCommandService -->
+    <string name="error_run_command_service_invalid_intent_action">RunCommandService へのインテントアクションが無効です: `%1$s`</string>
+    <string name="error_run_command_service_invalid_execution_command_runner">RunCommandService への実行コマンドランナーが無効です: `%1$s`</string>
+    <string name="error_run_command_service_mandatory_extra_missing">RunCommandService に必須の extra がありません: \"%1$s\"</string>
+    <string name="error_run_command_service_api_help">RUN_COMMAND インテントの使用方法の詳細は %1$s をご覧ください。</string>
+
+
+
+    <!-- Termux File Receiver -->
+    <string name="title_file_received">~/downloads/ にファイルを保存</string>
+    <string name="action_file_received_edit">編集</string>
+    <string name="action_file_received_open_directory">ディレクトリを開く</string>
+
+
+
+    <!-- Miscellaneous -->
+    <string name="error_termux_service_start_failed_general">TermuxService を開始できませんでした。例外メッセージは logcat を確認してください。</string>
+    <string name="error_termux_service_start_failed_bg">Android のバックグラウンド制限により、アプリがバックグラウンドにある間は TermuxService を開始できませんでした。</string>
+
+
+
+    <!-- Termux Settings -->
+    <string name="title_activity_termux_settings">&TERMUX_APP_NAME; の設定</string>
+
+    <!-- Termux App Preferences -->
+    <string name="termux_preferences_title">&TERMUX_APP_NAME;</string>
+    <string name="termux_preferences_summary">&TERMUX_APP_NAME; アプリの設定</string>
+
+        <!-- Debugging Preferences -->
+        <string name="termux_debugging_preferences_title">デバッグ</string>
+        <string name="termux_debugging_preferences_summary">デバッグの設定</string>
+
+            <!-- Logging Category -->
+            <string name="termux_logging_header">ログ</string>
+
+                <!-- Log Level -->
+                <string name="termux_log_level_title">ログレベル</string>
+
+                <!-- Terminal View Key Logging -->
+                <string name="termux_terminal_view_key_logging_enabled_title">ターミナルビューのキーログ</string>
+                <string name="termux_terminal_view_key_logging_enabled_off">ログにターミナルビューのキー入力は記録されません。(デフォルト)</string>
+                <string name="termux_terminal_view_key_logging_enabled_on">Logcat ログにターミナルビューのキー入力が記録されます。
+                    非常に冗長なため、通常は無効にしてください。有効にするとパフォーマンスが低下する可能性があります。</string>
+
+                <!-- Plugin Error Notifications -->
+                <string name="termux_plugin_error_notifications_enabled_title">プラグインエラーの通知</string>
+                <string name="termux_plugin_error_notifications_enabled_off">プラグインエラーのフラッシュと通知を無効にします。</string>
+                <string name="termux_plugin_error_notifications_enabled_on">プラグインエラーのフラッシュと通知を表示します。(デフォルト)</string>
+
+                <!-- Crash Report Notifications -->
+                <string name="termux_crash_report_notifications_enabled_title">クラッシュレポートの通知</string>
+                <string name="termux_crash_report_notifications_enabled_off">クラッシュレポートの通知を無効にします。</string>
+                <string name="termux_crash_report_notifications_enabled_on">クラッシュレポートの通知を表示します。(デフォルト)</string>
+
+
+        <!-- Terminal IO Preferences -->
+        <string name="termux_terminal_io_preferences_title">ターミナル I/O</string>
+        <string name="termux_terminal_io_preferences_summary">ターミナル I/O の設定</string>
+
+            <!-- Keyboard Category -->
+            <string name="termux_keyboard_header">キーボード</string>
+
+                <!-- Soft Keyboard -->
+                <string name="termux_soft_keyboard_enabled_title">ソフトキーボードを有効化</string>
+                <string name="termux_soft_keyboard_enabled_off">ソフトキーボードが無効になります。</string>
+                <string name="termux_soft_keyboard_enabled_on">ソフトキーボードが有効になります。(デフォルト)</string>
+
+                <!-- Soft Keyboard Only If No Hardware-->
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_title">ハードウェアキーボードがない場合のみソフトキーボード</string>
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_off">ハードウェアキーボードが接続されていても
+                    ソフトキーボードが有効になります。(デフォルト)</string>
+                <string name="termux_soft_keyboard_enabled_only_if_no_hardware_on">ハードウェアキーボードが接続されていない場合のみ
+                    ソフトキーボードが有効になります。</string>
+
+
+        <!-- Terminal View Preferences -->
+        <string name="termux_terminal_view_preferences_title">ターミナルビュー</string>
+        <string name="termux_terminal_view_preferences_summary">ターミナルビューの設定</string>
+
+            <!-- View Category -->
+            <string name="termux_terminal_view_view_header">表示</string>
+
+                <!-- Terminal View Margin Adjustment -->
+                <string name="termux_terminal_view_terminal_margin_adjustment_title">ターミナルの余白調整</string>
+                <string name="termux_terminal_view_terminal_margin_adjustment_off">ターミナルの余白調整が無効になります。</string>
+                <string name="termux_terminal_view_terminal_margin_adjustment_on">ターミナルの余白調整が有効になります。
+                    ソフトキーボードが追加キーやターミナルビューの一部を覆う問題を修正するために有効にしてください。
+                    デバイスで画面のちらつきが発生する場合は無効にしてください。(デフォルト)</string>
+
+
+
+    <!-- Termux:API App Preferences -->
+    <string name="termux_api_preferences_title">&TERMUX_API_APP_NAME;</string>
+    <string name="termux_api_preferences_summary">&TERMUX_API_APP_NAME; アプリの設定</string>
+
+
+
+    <!-- Termux:Float App Preferences -->
+    <string name="termux_float_preferences_title">&TERMUX_FLOAT_APP_NAME;</string>
+    <string name="termux_float_preferences_summary">&TERMUX_FLOAT_APP_NAME; アプリの設定</string>
+
+
+
+    <!-- Termux:Tasker App Preferences -->
+    <string name="termux_tasker_preferences_title">&TERMUX_TASKER_APP_NAME;</string>
+    <string name="termux_tasker_preferences_summary">&TERMUX_TASKER_APP_NAME; アプリの設定</string>
+
+
+
+    <!-- Termux:Widget App Preferences -->
+    <string name="termux_widget_preferences_title">&TERMUX_WIDGET_APP_NAME;</string>
+    <string name="termux_widget_preferences_summary">&TERMUX_WIDGET_APP_NAME; アプリの設定</string>
+
+
+
+    <!-- About Preference -->
+    <string name="about_preference_title">このアプリについて</string>
+
+    <!-- Donate Preference -->
+    <string name="donate_preference_title">寄付</string>
+
+</resources>
